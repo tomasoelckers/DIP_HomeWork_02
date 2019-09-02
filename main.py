@@ -1,5 +1,6 @@
 import cv2
 import matplotlib.pyplot as plt
+import dip_tools
 
 # Direction path and name of the picture file.
 DIR = 'Images/'
@@ -10,6 +11,12 @@ im = cv2.imread(DIR+Image, 0)
 
 # Get the shape of the picture
 (Height, Width) = im.shape[:2]
+
+# Work
+u = dip_tools.mean(im)
+var = dip_tools.variance(im)
+
+print(u, var)
 
 # Display picture
 plt.figure(1)
