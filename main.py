@@ -4,23 +4,26 @@ import dip_tools
 
 # Direction path and name of the picture file.
 DIR = 'Images/'
-Image = 'leaf.png'
+Image = 'bacteries.jpg'
 
 # Load image
 im = cv2.imread(DIR+Image, 0)
+
 
 # Get the shape of the picture
 (Height, Width) = im.shape[:2]
 
 # Work
-u = dip_tools.mean(im)
-var = dip_tools.variance(im)
-
-print(u, var)
+im_var = dip_tools.variance_filter(im)
 
 # Display picture
 plt.figure(1)
 plt.imshow(im, cmap='gray')
+plt.show()
+
+# Display filtered picture
+plt.figure(2)
+plt.imshow(im_var, cmap='gray')
 plt.show()
 
 # Display the result of the Where is Waldo? problem
