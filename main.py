@@ -4,11 +4,10 @@ import dip_tools
 
 # Direction path and name of the picture file.
 DIR = 'Images/'
-Image = 'bacteries.jpg'
+Image = 'bacteria.jpg'  # bacteria 1836 x 3254
 
 # Load image
-im = cv2.imread(DIR+Image, 0)
-
+im = cv2.imread(DIR + Image, 0)
 
 # Get the shape of the picture
 (Height, Width) = im.shape[:2]

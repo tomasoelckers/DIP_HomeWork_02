@@ -13,7 +13,6 @@ def mean(a):
             sum += a[i][j]
 
     # return the mean of a
-    print(height, width)
     return sum / (height * width)
 
 
@@ -34,13 +33,9 @@ def variance(a):
     for i in range(height):
         for j in range(width):
             # Subtracting mean from the element
-            buff[i][j] -= m
-
             # Squaring the element
-            buff[i][j] *= buff[i][j]
-
             # Adding the element to sum
-            sum += buff[i][j]
+            sum += (buff[i][j] - m) ** 2
 
     # return variance
     return sum / (height * width)
@@ -57,7 +52,6 @@ def variance_filter(image):
     #  Get the dimensions of a
     (height, width) = buff.shape
 
-    print(temp)
     for i in range(height):
         for j in range(width):
             if j - 1 > 0 and j + 1 < width and i - 1 > 0 and i + 1 < height:
@@ -65,16 +59,18 @@ def variance_filter(image):
 
     # Delete the extremes rows
     result = temp[~np.all(temp == 0, axis=1)]
-    # Delete the extremes colums
+    # Delete the extremes columns
     result = np.delete(result, np.s_[::width - 1], 1)
 
     return result
 
 
-x = np.array([[1, 2, 3, 4],
+'''x = np.array([[1, 2, 3, 4],
               [5, 6, 7, 8],
               [9, 10, 11, 12],
               [13, 14, 15, 16]])
 
+print(np.var(x), variance(x))
+
 i, j = 2, 1
-print(x[j - 1:j + 2, i - 1:i + 2])
+print(x[j - 1:j + 2, i - 1:i + 2])'''
