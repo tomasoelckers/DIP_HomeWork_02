@@ -41,7 +41,8 @@ def variance(a):
     return sum / (height * width)
 
 
-def variance_filter(image):
+# window size 3x3 == 0, 5x5 == 1, 7x7 == 2
+def variance_filter(image, size=0):
     # Copy image to new variables
     buff = image.copy()
     temp = image.copy()
@@ -55,10 +56,11 @@ def variance_filter(image):
     # go through the matrix and change the pixel value for variance of its 3x3 neighborhood
     for j in range(height):
         for i in range(width):
-            if j - 1 > 0 and j + 1 < height and i - 1 > 0 and i + 1 < width:
-                temp[j][i] = variance(buff[j - 1:j + 2, i - 1:i + 2])
+            if j - 1 - size > 0 and j + 1 + size < height and i - 1 - size > 0 and i + 1 + size < width:
+                temp[j][i] = variance(buff[j - 1 - size:j + 2 + size, i - 1 - size:i + 2 + size])
 
     return temp
+
 
 def dev_std_filter(image):
     # Copy image to new variables
