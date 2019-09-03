@@ -17,18 +17,18 @@ im = cv2.imread(DIR + Image, 0)
 
 # Work with variance and standard deviation filters
 
-im_filtered = dip_tools.std_dev_filter(im)
+# im_filtered = dip_tools.std_dev_filter(im)
 # im_filtered = dip_tools.variance_filter(im, 1)
 
 # Work with Sobel and Laplacian filters: ksize = kernel size.
 
 # cv2 Sobel filter.
-# im_filtered = cv2.Sobel(im, cv2.CV_64F, 1, 0, ksize=5)
-# im_filtered = cv2.Sobel(im, cv2.CV_64F, 0, 1, ksize=5)
-# im_filtered = cv2.Sobel(im, cv2.CV_64F, 1, 1, ksize=5)
+# im_filtered = cv2.Sobel(im, cv2.CV_64F, 1, 0, ksize=3) # sobel x
+# im_filtered = cv2.Sobel(im, cv2.CV_64F, 0, 1, ksize=3) # sobel y
+# im_filtered = cv2.Sobel(im, cv2.CV_64F, 1, 1, ksize=7) # sobel
 
 # cv2 Laplacian filter.
-# im_filtered = cv2.Laplacian(im, cv2.CV_64F, ksize=5)
+im_filtered = cv2.Laplacian(im, cv2.CV_64F, ksize=7)
 
 
 # Display picture
@@ -42,7 +42,7 @@ plt.imshow(im_filtered, cmap='gray')
 plt.show()
 
 # Save picture filtered
-cv2.imwrite('Images_Results/variance/'+'leaf_std_dev_filtered_3x3.jpg', im_filtered)
+cv2.imwrite('Images_Results/Laplacian/'+'leaf_laplacian_filtered_7x7.png', im_filtered)
 
 # Display the result on CV2
 '''cv2.namedWindow('Picture', cv2.WINDOW_NORMAL)
