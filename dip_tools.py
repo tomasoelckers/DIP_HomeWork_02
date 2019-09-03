@@ -8,9 +8,9 @@ def mean(a):
     sum = 0
 
     # go through the matrix and add every element to sum
-    for i in range(height):
-        for j in range(height):
-            sum += a[i][j]
+    for j in range(height):
+        for i in range(width):
+            sum += a[j][i]
 
     # return the mean of a
     return sum / (height * width)
@@ -30,47 +30,63 @@ def variance(a):
     sum = 0
 
     # go through the matrix and add every element with a subtraction of the mean
-    for i in range(height):
-        for j in range(width):
+    for j in range(height):
+        for i in range(width):
             # Subtracting mean from the element
             # Squaring the element
             # Adding the element to sum
-            sum += (buff[i][j] - m) ** 2
+            sum += (buff[j][i] - m) ** 2
 
     # return variance
     return sum / (height * width)
 
 
 def variance_filter(image):
-    # Copy image to new variable
+    # Copy image to new variables
     buff = image.copy()
+    temp = image.copy()
 
     # padding zero in extremes
     buff = (np.pad(buff, pad_width=1, mode='constant', constant_values=0))
-    temp = buff.copy()
 
     #  Get the dimensions of a
-    (height, width) = buff.shape
+    (height, width) = image.shape
 
-    for i in range(height):
-        for j in range(width):
-            if j - 1 > 0 and j + 1 < width and i - 1 > 0 and i + 1 < height:
-                temp[i][j] = variance(buff[j - 1:j + 2, i - 1:i + 2])
+    # go through the matrix and change the pixel value for variance of its 3x3 neighborhood
+    for j in range(height):
+        for i in range(width):
+            if j - 1 > 0 and j + 1 < height and i - 1 > 0 and i + 1 < width:
+                temp[j][i] = variance(buff[j - 1:j + 2, i - 1:i + 2])
 
-    # Delete the extremes rows
-    result = temp[~np.all(temp == 0, axis=1)]
-    # Delete the extremes columns
-    result = np.delete(result, np.s_[::width - 1], 1)
+    return temp
 
-    return result
+def dev_std_filter(image):
+    # Copy image to new variables
+    buff = image.copy()
+    temp = image.copy()
+
+    # padding zero in extremes
+    buff = (np.pad(buff, pad_width=1, mode='constant', constant_values=0))
+
+    #  Get the dimensions of a
+    (height, width) = image.shape
+
+    # go through the matrix and change the pixel value for variance of its 3x3 neighborhood
+    for j in range(height):
+        for i in range(width):
+            if j - 1 > 0 and j + 1 < height and i - 1 > 0 and i + 1 < width:
+                temp[j][i] = np.sqrt(variance(buff[j - 1:j + 2, i - 1:i + 2]))
+
+    return temp
 
 
 '''x = np.array([[1, 2, 3, 4],
               [5, 6, 7, 8],
               [9, 10, 11, 12],
-              [13, 14, 15, 16]])
+              [13, 14, 15, 16],
+              [17, 18, 19, 20]])
 
-print(np.var(x), variance(x))
+print(mean(x), variance(x))
+print(np.mean(x), np.var(x))
 
-i, j = 2, 1
-print(x[j - 1:j + 2, i - 1:i + 2])'''
+print(variance_filter(x))'''
