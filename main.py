@@ -43,7 +43,7 @@ plt.figure(2)
 plt.imshow(im_laplacian, cmap='gray')
 plt.show()
 
-# Display the result of the Where is Waldo? problem
+# Display the result on CV2
 '''cv2.namedWindow('Picture', cv2.WINDOW_NORMAL)
 cv2.resizeWindow('Picture', 800, 600)
 cv2.imshow('Picture', im)
