@@ -41,7 +41,7 @@ def variance(a):
     return sum / (height * width)
 
 
-# window size 3x3 == 0, 5x5 == 1, 7x7 == 2
+# window size 3x3 == 0, 5x5 == 1, 7x7 == 2.
 def variance_filter(image, size=0):
     # Copy image to new variables
     buff = image.copy()
@@ -62,7 +62,7 @@ def variance_filter(image, size=0):
     return temp
 
 
-def dev_std_filter(image):
+def std_dev_filter(image):
     # Copy image to new variables
     buff = image.copy()
     temp = image.copy()
