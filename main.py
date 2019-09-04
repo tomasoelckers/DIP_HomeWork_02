@@ -32,7 +32,6 @@ im_filtered = dip_tools.variance_filter(im, dof=1)
 
 # cv2 Canny Edge Detection
 # im_filtered = cv2.Canny(im, 100, 100)
-pass
 
 # Display picture
 plt.figure(1)
